@@ -128,7 +128,7 @@ void PathPlannerROS::goalSetCallback(const geometry_msgs::PoseStamped::ConstPtr 
 
     // ROS_INFO("start_point x:%f, y:%f, yaw: %f", start.x, start.y, start.theta);
     // ROS_INFO("goal_point x:%f, y:%f, yaw: %f", goal.x, goal.y, goal.theta);
-    Coordinates path;
+    Coordinates path;// 每个点包含 x,y,theta
     int iterations;
     std::chrono::time_point<std::chrono::steady_clock> tic = std::chrono::steady_clock::now();
     bool path_planner_success = _astar->createPath(start, goal, path, iterations);
@@ -137,7 +137,7 @@ void PathPlannerROS::goalSetCallback(const geometry_msgs::PoseStamped::ConstPtr 
     ROS_INFO("[PathPlannerROS::initialPoseCallback] Planner taken: %ld ms", duration);
     if (path_planner_success)
     {
-        std::reverse(path.begin(), path.end());
+        std::reverse(path.begin(), path.end());// 路径存在则翻转路径
         ROS_INFO("[PathPlannerROS::initialPoseCallback] Path found, iterations: %d, Path size: %lu", iterations, path.size());
         tic = std::chrono::steady_clock::now();
         _smoother->smoothPath(path);

@@ -20,8 +20,8 @@ struct NodeConfig
 {
     bool collision_hole;
     std::vector<float> footprint;
-    SearchInfo search_info;
-    SmoothInfo smooth_info;
+    SearchInfo search_info; //Hybrid A* search info
+    SmoothInfo smooth_info;//Path smoothing info
 };
 
 class PathPlannerROS
@@ -46,10 +46,10 @@ private:
     tf2_ros::Buffer _tf_buffer;
     tf2_ros::TransformListener _tf_listener;
     costmap_2d::Costmap2DROS _costmap_2d_ros;
-    CollisionChecker _collision_checker;
-    ros::Publisher _path_pub;
-    std::shared_ptr<AstarHybrid> _astar;
-    std::shared_ptr<Smoother> _smoother;
+    CollisionChecker _collision_checker;// Collision checker
+    ros::Publisher _path_pub; 
+    std::shared_ptr<AstarHybrid> _astar;// Hybrid A* path planner
+    std::shared_ptr<Smoother> _smoother;// Path smoother
 
     ros::Subscriber _initial_pose_sub;
     ros::Subscriber _goal_pose_sub;

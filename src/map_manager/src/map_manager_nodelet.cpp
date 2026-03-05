@@ -15,4 +15,4 @@ namespace navigations
 }
 
 #include <pluginlib/class_list_macros.h>
-PLUGINLIB_EXPORT_CLASS(navigations::MapManagerNodelet, nodelet::Nodelet)
+PLUGINLIB_EXPORT_CLASS(navigations::MapManagerNodelet, nodelet::Nodelet) //将MapManagerNodelet类注册为一个nodelet插件，使其可以被ROS系统加载和使用
