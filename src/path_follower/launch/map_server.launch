@@ -1,0 +1,6 @@
+<launch>
+    <arg name="map_yaml" default="$(find path_follower)/maps/nav.yaml" />
+    <node pkg="map_server" type="map_server" name="map_server" output="screen" args="$(arg map_yaml)">
+        <remap from="map" to="/map" />
+    </node>
+</launch>

@@ -1,10 +1,14 @@
 <launch>
     <arg name="rviz" default="true" />
     <env name="ROSCONSOLE_CONFIG_FILE" value="$(find path_follower)/config/run.conf" />
-    <node pkg="map_manager" type="map_manager_node" name="map_manager" output="screen">
+    <!-- <node pkg="map_manager" type="map_manager_node" name="map_manager" output="screen">
         <param name="map_dir" value="$(find path_follower)/maps" />
-        <param name="yaml_name" value="sim" />
-    </node>
+        <param name="yaml_name" value="nav" />
+    </node> -->
+   <include file="$(find path_follower)/launch/map_server.launch">
+        <arg name="map_yaml" value="$(find path_follower)/maps/nav.yaml" />
+    </include>
+
     <node pkg="path_follower" type="tf_pub_once_node" name="tf_pub" output="screen" />
     <node pkg="path_planner" type="path_planner_node" name="path_planner" output="screen">
         <rosparam command="load" file="$(find path_planner)/config/params.yaml" />

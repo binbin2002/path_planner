@@ -20,6 +20,14 @@ struct NodeConfig
     std::string map_frame_id = "map";
     std::string metadata_topic = "/map_metadata";
     std::string map_dir = "/home/lion/config/maps";
+
+    // 若为true：按ROS map_server标准解释yaml：occupied_thresh/free_thresh为0~1，且中间区域输出unknown
+    // 若为false：保持当前实现：阈值按0~255灰度解释
+    bool compat_map_server_yaml = true;
+    // 是否对介于free_thresh与occupied_thresh之间区域输出unknown(-1)
+    bool output_unknown = true;
+    // unknown栅格输出值，nav_msgs/OccupancyGrid 约定为 -1
+    int8_t unknown_value = -1;
 };
 
 struct NodeState
